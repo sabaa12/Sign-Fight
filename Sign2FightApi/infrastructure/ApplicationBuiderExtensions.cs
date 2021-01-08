@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Sign2FightApi.Data;
+using Repository;
 
 namespace Sign2FightApi.infrastructure
 {

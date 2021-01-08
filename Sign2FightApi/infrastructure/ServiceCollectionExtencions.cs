@@ -3,13 +3,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Sign2FightApi;
-using Sign2FightApi.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Models;
+using Repository;
+using Domain.Models.Data;
+using Service.Identity;
+using Domain.Models.Data.Interfaces.Repositories;
+using Domain.Interfaces.Repositories;
+using Service.Causes;
+using Microsoft.AspNetCore.Http;
 
 namespace Sign2FightApi.infrastructure
 {
@@ -53,9 +58,15 @@ namespace Sign2FightApi.infrastructure
             return services;
         }
 
-        //public static IServiceCollection AddApplicationServices(this IServiceCollection services)=>
-        //    services
-        //    .AddTransient<IIdentityservice, IdentityService>()
-        //    .AddTransient<IcontactsService, ContactsService>();
-      }
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services) =>
+            services
+            .AddScoped(typeof(IIdentityRepository), typeof(IdentityRepository))
+            .AddTransient<IIdentityService, IdentityService>()
+            .AddScoped(typeof(ICauseRepository), typeof(CauseRepository))
+            .AddTransient<ICausesService, CausesService>()
+            .AddScoped(typeof(ISubScribesRepository), typeof(SubScribesRepository))
+            .AddTransient<ISubscribesService, SubscribesService>();
+
+
+    }
 }

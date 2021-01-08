@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces.Repositories
+namespace Domain.Models.Data.Interfaces.Repositories
 {
    public interface IRepositoryBase<TEntity> where TEntity : class
     {
@@ -14,6 +14,7 @@ namespace Domain.Interfaces.Repositories
         TEntity FindById(params object[] id);
         void Create(TEntity entity);
         void Update(TEntity entity);
-        void Delete(int id);
+        void Delete(object id);
+        bool Save();
     }
 }
